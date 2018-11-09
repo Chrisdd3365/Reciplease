@@ -15,4 +15,13 @@ public class FavoriteRecipe: NSManagedObject {
         guard let favoritesRecipes = try? AppDelegate.viewContext.fetch(request) else { return [] }
         return favoritesRecipes
     }
+    
+    func deleteRecipeFromFavorite(index: Int) {
+        AppDelegate.viewContext.delete(FavoriteRecipe.all[index])
+        do {
+            try AppDelegate.viewContext.save()
+        } catch let error as NSError {
+            print(error)
+        }
+    }
 }

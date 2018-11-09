@@ -17,9 +17,11 @@ class DetailedRecipesViewController: UIViewController {
     var detailedRecipe: DetailedRecipe!
     var matchingRecipe: Matches!
     var favoriteRecipe = FavoriteRecipe.all
+    var detailedFavoriteRecipe: FavoriteRecipe!
     var noFavoriteButtonImage = UIImage(named: "noFavorite")
     var favoriteButtonImage = UIImage(named: "favorite")
     var isFavorite = false
+    var index: Int!
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -39,6 +41,8 @@ class DetailedRecipesViewController: UIViewController {
         } else {
             setTabBarControllerItemBadgeValue(string: "")
             detailedRecipeView.favoriteButton.setImage(noFavoriteButtonImage, for: .normal)
+            setTabBarControllerItemBadgeValue(string: "")
+            //removeFavoriteRecipe(index:)
         }
     }
     
@@ -88,19 +92,16 @@ class DetailedRecipesViewController: UIViewController {
         favoritesRecipes.rating = Int16(detailedRecipe.rating)
         favoritesRecipes.totalTimeInSeconds = Int16(detailedRecipe.totalTimeInSeconds)
         favoritesRecipes.sourceUrl = detailedRecipe.source.sourceRecipeUrl
-        saveContext()
-    }
-
-    private func removeFavoriteRecipe() {
-        //TODO
-    }
-    
-    func saveContext() {
         do {
             try AppDelegate.viewContext.save()
         } catch let error as NSError {
             print(error)
         }
+    }
+
+    private func removeFavoriteRecipe() {
+        //TODO
+        detailedFavoriteRecipe.deleteRecipeFromFavorite(index: index)
     }
     
     private func convertIngredientsArrayIntoString(ingredients: [String]) -> String {

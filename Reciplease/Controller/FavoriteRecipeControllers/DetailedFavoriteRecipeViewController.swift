@@ -16,6 +16,7 @@ class DetailedFavoriteRecipeViewController: UIViewController {
     //MARK: - Properties
     var detailedFavoriteRecipe: FavoriteRecipe!
     var isFavorite = false
+    var index : Int!
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -32,6 +33,8 @@ class DetailedFavoriteRecipeViewController: UIViewController {
     
     @IBAction func favoriteFunctionality(_ sender: UIButton) {
         //TODO
+        detailedFavoriteRecipe.deleteRecipeFromFavorite(index: index)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func share(_ sender: UIButton) {
@@ -39,9 +42,23 @@ class DetailedFavoriteRecipeViewController: UIViewController {
     }
     
     //MARK: - Methods
+    private func setupNavigationBarItem() {
+        navigationItem.title = "Detailed Favorite Recipe"
+        navigationController?.navigationBar.tintColor = UIColor.black
+    }
+    
     private func sharingRecipeButtonTapped() {
         let activityController = UIActivityViewController(activityItems: ["Can you cook that for me?", detailedFavoriteRecipe.sourceUrl as Any], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
+    }
+    
+    private func getDirectionsFromSourceRecipeURL() {
+        if let detailedFavoriteRecipe = detailedFavoriteRecipe {
+            guard let url = URL(string: detailedFavoriteRecipe.sourceUrl!) else { return }
+            UIApplication.shared.open(url)
+        } else {
+            showAlert(title: "Error", message: "Failed to get you any directions. Try again!")
+        }
     }
     
     private func setDetailedFavoriteRecipeUI() {
@@ -55,19 +72,5 @@ class DetailedFavoriteRecipeViewController: UIViewController {
             description += "- " + ingredients + "\n"
         }
         return description
-    }
-    
-    private func getDirectionsFromSourceRecipeURL() {
-        if let detailedFavoriteRecipe = detailedFavoriteRecipe {
-            guard let url = URL(string: detailedFavoriteRecipe.sourceUrl!) else { return }
-            UIApplication.shared.open(url)
-        } else {
-            showAlert(title: "Error", message: "Failed to get you any directions. Try again!")
-        }
-    }
-    
-    private func setupNavigationBarItem() {
-        navigationItem.title = "Detailed Favorite Recipe"
-        navigationController?.navigationBar.tintColor = UIColor.black
     }
 }
