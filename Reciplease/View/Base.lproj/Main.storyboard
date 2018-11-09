@@ -485,7 +485,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jvc-tr-D3O"/>
                         <connections>
-                            <outlet property="activityIndicator" destination="1rY-U4-bro" id="lFG-8U-rfd"/>
+                            <outlet property="activityIndicator" destination="1rY-U4-bro" id="9vc-Iu-VUD"/>
                             <outlet property="addButton" destination="MDN-Ee-qke" id="dOW-B0-uWY"/>
                             <outlet property="clearButton" destination="eB4-So-Apx" id="4Sw-V6-2kL"/>
                             <outlet property="ingredientsTextField" destination="MYe-hO-BgG" id="1w3-HA-75R"/>

@@ -31,8 +31,15 @@ class DetailedRecipeView: UIView {
     }
     
     func toggleActivityIndicator(shown: Bool) {
-        activityIndicator.isHidden = !shown
-        getDirectionsButton.isHidden = shown
+        if shown == false {
+            activityIndicator.isHidden = !shown
+            activityIndicator.stopAnimating()
+            getDirectionsButton.isHidden = shown
+        } else {
+            activityIndicator.isHidden = !shown
+            activityIndicator.startAnimating()
+            getDirectionsButton.isHidden = shown
+        }
     }
     
     func detailedRecipeConfigure(detailedRecipeName: String, detailedRecipeDetails: [String], rating: Int, timer: Int, backgroundDetailedRecipeImageURL: String) {

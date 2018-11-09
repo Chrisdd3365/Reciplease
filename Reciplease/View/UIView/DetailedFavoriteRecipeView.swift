@@ -23,8 +23,15 @@ class DetailedFavoriteRecipeView: UIView {
     
     //MARK: - Methods
     func toggleActivityIndicator(shown: Bool) {
-        activityIndicator.isHidden = !shown
-        getDirectionsButton.isHidden = shown
+        if shown == false {
+            activityIndicator.isHidden = !shown
+            activityIndicator.stopAnimating()
+            getDirectionsButton.isHidden = shown
+        } else {
+            activityIndicator.isHidden = !shown
+            activityIndicator.startAnimating()
+            getDirectionsButton.isHidden = shown
+        }
     }
     
     func detailedFavoriteRecipeConfigure(detailedFavoriteRecipeName: String, detailedFavoriteRecipeDetails: String, rating: Int, timer: Int, backgroundDetailedFavoriteRecipeImageURL: String) {
