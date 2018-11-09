@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 
 public class FavoriteRecipe: NSManagedObject {
+    //Init dictionary for stocking RecipeName
+    static var recipeNameInFavorite: Dictionary<String, Bool> = [:]
     static var all: [FavoriteRecipe] {
         let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
         guard let favoritesRecipes = try? AppDelegate.viewContext.fetch(request) else { return [] }
