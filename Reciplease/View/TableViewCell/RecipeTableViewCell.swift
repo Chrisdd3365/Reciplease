@@ -16,8 +16,6 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var recipeDetailsLabel: UILabel!
     @IBOutlet weak var ratingsLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var ratingsImageView: UIImageView!
-    @IBOutlet weak var timerImageView: UIImageView!
     @IBOutlet weak var view: UIView!
     
     //MARK: - Methods

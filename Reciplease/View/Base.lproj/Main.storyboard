@@ -346,7 +346,7 @@
         <scene sceneID="a3F-ab-j9y">
             <objects>
                 <viewController id="KgN-Y4-Yaz" customClass="SearchRecipeViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jQw-lI-TgV">
+                    <view key="view" contentMode="scaleToFill" id="jQw-lI-TgV" customClass="SearchRecipeView" customModule="Reciplease" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -387,7 +387,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="add:" destination="KgN-Y4-Yaz" eventType="touchUpInside" id="r6D-RB-Ebj"/>
+                                                            <action selector="add:" destination="KgN-Y4-Yaz" eventType="touchUpInside" id="aeA-9E-0RP"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -424,7 +424,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="clear:" destination="KgN-Y4-Yaz" eventType="touchUpInside" id="zyo-iK-ctO"/>
+                                    <action selector="clear:" destination="KgN-Y4-Yaz" eventType="touchUpInside" id="ZTi-2q-I85"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pZ3-6a-pye">
@@ -441,8 +441,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="KgN-Y4-Yaz" id="ceR-bn-Qqf"/>
-                                    <outlet property="delegate" destination="KgN-Y4-Yaz" id="ved-Ah-9DM"/>
+                                    <outlet property="dataSource" destination="KgN-Y4-Yaz" id="svz-91-iiC"/>
+                                    <outlet property="delegate" destination="KgN-Y4-Yaz" id="5x3-Zj-p9o"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kme-oD-lBC">
@@ -461,7 +461,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="searchForRecipes:" destination="KgN-Y4-Yaz" eventType="touchUpInside" id="1oQ-Ta-aVR"/>
+                                    <action selector="searchForRecipes:" destination="KgN-Y4-Yaz" eventType="touchUpInside" id="H9R-wy-gYP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -484,17 +484,20 @@
                             <constraint firstItem="Jvc-tr-D3O" firstAttribute="trailing" secondItem="eB4-So-Apx" secondAttribute="trailing" constant="10" id="mE1-IU-VQl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jvc-tr-D3O"/>
+                        <connections>
+                            <outlet property="activityIndicator" destination="1rY-U4-bro" id="lFG-8U-rfd"/>
+                            <outlet property="addButton" destination="MDN-Ee-qke" id="dOW-B0-uWY"/>
+                            <outlet property="clearButton" destination="eB4-So-Apx" id="4Sw-V6-2kL"/>
+                            <outlet property="ingredientsTextField" destination="MYe-hO-BgG" id="1w3-HA-75R"/>
+                            <outlet property="searchForRecipesButton" destination="Kme-oD-lBC" id="qiO-Bi-LfS"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="oO1-4S-B04">
                         <barButtonItem key="backBarButtonItem" title="Back" id="bIP-aJ-eG3"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="1rY-U4-bro" id="cGo-oj-8Uz"/>
-                        <outlet property="addButton" destination="MDN-Ee-qke" id="olF-L3-DfS"/>
-                        <outlet property="clearButton" destination="eB4-So-Apx" id="OxM-gz-LWZ"/>
-                        <outlet property="ingredientsTableView" destination="pZ3-6a-pye" id="aR1-Ss-SyB"/>
-                        <outlet property="ingredientsTextField" destination="MYe-hO-BgG" id="ama-5O-cRG"/>
-                        <outlet property="searchForRecipesButton" destination="Kme-oD-lBC" id="x1i-lE-PK3"/>
+                        <outlet property="ingredientsTableView" destination="pZ3-6a-pye" id="buJ-9P-Y7r"/>
+                        <outlet property="searchRecipeView" destination="jQw-lI-TgV" id="CDq-bi-PRC"/>
                         <segue destination="7vf-pR-c2Q" kind="show" identifier="recipesResultsSegue" id="6MG-qK-03R"/>
                     </connections>
                 </viewController>
@@ -606,12 +609,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="ratingsImageView" destination="ckH-WF-VxZ" id="MLQ-0T-LP9"/>
                                             <outlet property="ratingsLabel" destination="R2b-1a-noR" id="JlT-5D-t2y"/>
                                             <outlet property="recipeBackgroundImage" destination="trH-Ys-8ZN" id="x9V-bS-Eq3"/>
                                             <outlet property="recipeDetailsLabel" destination="fX5-Y3-qVS" id="vzX-wJ-q72"/>
                                             <outlet property="recipeTitleLabel" destination="vpE-mb-10X" id="fur-kv-Fa0"/>
-                                            <outlet property="timerImageView" destination="VPs-0w-1qA" id="rdm-Uv-AHg"/>
                                             <outlet property="timerLabel" destination="Ulw-Fm-UGQ" id="lAb-NA-KuO"/>
                                             <outlet property="view" destination="VdN-vh-qCg" id="cgm-US-pxz"/>
                                         </connections>

@@ -13,6 +13,7 @@
 		950F7EB92162833700618958 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 950F7EB72162833700618958 /* Main.storyboard */; };
 		950F7EBE2162833900618958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 950F7EBD2162833900618958 /* Assets.xcassets */; };
 		95123AB3217E20A500860546 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95123AB2217E20A500860546 /* UITextField.swift */; };
+		9543A5E52195F93D00CC4095 /* SearchRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9543A5E42195F93D00CC4095 /* SearchRecipeView.swift */; };
 		9544A1812183831500E6FE78 /* FavoriteRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9544A1802183831500E6FE78 /* FavoriteRecipeTableViewCell.swift */; };
 		9544A1932183A36800E6FE78 /* DetailedFavoriteRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9544A1922183A36800E6FE78 /* DetailedFavoriteRecipeViewController.swift */; };
 		9544A1972183A77B00E6FE78 /* DetailedFavoriteRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9544A1962183A77B00E6FE78 /* DetailedFavoriteRecipeView.swift */; };
@@ -63,6 +64,7 @@
 		950F7EC72162833900618958 /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		950F7ECD2162833900618958 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95123AB2217E20A500860546 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		9543A5E42195F93D00CC4095 /* SearchRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeView.swift; sourceTree = "<group>"; };
 		9544A1802183831500E6FE78 /* FavoriteRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		9544A1922183A36800E6FE78 /* DetailedFavoriteRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFavoriteRecipeViewController.swift; sourceTree = "<group>"; };
 		9544A1962183A77B00E6FE78 /* DetailedFavoriteRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFavoriteRecipeView.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 		9595603C2180A25100DB0F84 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
+				9543A5E42195F93D00CC4095 /* SearchRecipeView.swift */,
 				9578032A217A526D006F2B3C /* DetailedRecipeView.swift */,
 				9544A1962183A77B00E6FE78 /* DetailedFavoriteRecipeView.swift */,
 			);
@@ -521,6 +524,7 @@
 				9578032B217A526D006F2B3C /* DetailedRecipeView.swift in Sources */,
 				95655514219205EA002F1755 /* FavoriteRecipe.swift in Sources */,
 				9573CAA32163BC4A0051E7EB /* URLStruct.swift in Sources */,
+				9543A5E52195F93D00CC4095 /* SearchRecipeView.swift in Sources */,
 				9544A1932183A36800E6FE78 /* DetailedFavoriteRecipeViewController.swift in Sources */,
 				9565551221920577002F1755 /* Reciplease.xcdatamodeld in Sources */,
 				95C691EC216B993000BEB718 /* SearchRecipe.swift in Sources */,

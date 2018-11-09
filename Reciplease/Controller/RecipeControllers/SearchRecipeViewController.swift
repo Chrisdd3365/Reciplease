@@ -11,12 +11,8 @@ import UIKit
 class SearchRecipeViewController: UIViewController {
 
     //MARK: - Outlets
-    @IBOutlet weak var ingredientsTextField: UITextField!
-    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var ingredientsTableView: UITableView!
-    @IBOutlet weak var clearButton: UIButton!
-    @IBOutlet weak var searchForRecipesButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var searchRecipeView: SearchRecipeView!
     
     //MARK: - Properties
     var ingredients: [String] = []
@@ -26,9 +22,9 @@ class SearchRecipeViewController: UIViewController {
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        ingredientsTextField.setBottomBorder()
+        searchRecipeView.ingredientsTextField.setBottomBorder()
         searchForRecipeButtonIsEnabled()
-        toggleActivityIndicator(shown: false)
+        searchRecipeView.toggleActivityIndicator(shown: false)
         registerIngredientsTableView()
     }
     
@@ -47,7 +43,7 @@ class SearchRecipeViewController: UIViewController {
 
     //MARK: - Methods
     private func addIngredientIntoList() {
-        guard let inputs = ingredientsTextField.text else { return }
+        guard let inputs = searchRecipeView.ingredientsTextField.text else { return }
         if inputs != "" {
             let ingredients = inputs.components(separatedBy: ", ")
             for ingredient in ingredients {
@@ -56,7 +52,7 @@ class SearchRecipeViewController: UIViewController {
                 self.add(ingredient: ingredientName)
             }
             ingredientsTableView.reloadData()
-            ingredientsTextField.text = ""
+            searchRecipeView.ingredientsTextField.text = ""
         } else {
             showAlert(title: "Hey!", message: "You need to tell me what's in your fridge first!")
         }
@@ -70,8 +66,8 @@ class SearchRecipeViewController: UIViewController {
         if ingredients.isEmpty == false  {
             ingredients.removeAll()
             ingredientsTableView.reloadData()
-            searchForRecipesButton.isEnabled = false
-            searchForRecipesButton.backgroundColor = UIColor.lightGray
+            searchRecipeView.searchForRecipesButton.isEnabled = false
+            searchRecipeView.searchForRecipesButton.backgroundColor = UIColor.lightGray
         } else {
             showAlert(title: "Hey!", message: "Don't clear what you already don't have!")
         }
@@ -79,11 +75,11 @@ class SearchRecipeViewController: UIViewController {
     
     private func searchRecipe() {
         searchRecipeService.getRecipe(ingredients: ingredients) { (success, recipes)  in
-            self.toggleActivityIndicator(shown: true)
+            self.searchRecipeView.toggleActivityIndicator(shown: true)
             if success, let recipes = recipes {
                 self.matchingRecipes = recipes
                 self.performSegue(withIdentifier: "recipesResultsSegue", sender: self)
-                self.toggleActivityIndicator(shown: false)
+                self.searchRecipeView.toggleActivityIndicator(shown: false)
             } else {
                 self.showAlert(title: "Error", message: "Recipes data download failed!")
             }
@@ -91,18 +87,13 @@ class SearchRecipeViewController: UIViewController {
     }
     
     private func searchForRecipeButtonIsEnabled() {
-        searchForRecipesButton.isEnabled = false
-        searchForRecipesButton.backgroundColor = UIColor.lightGray
+        searchRecipeView.searchForRecipesButton.isEnabled = false
+        searchRecipeView.searchForRecipesButton.backgroundColor = UIColor.lightGray
     }
     
     private func registerIngredientsTableView() {
         ingredientsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "ingredientCell")
         ingredientsTableView.reloadData()
-    }
-    
-    private func toggleActivityIndicator(shown: Bool) {
-        activityIndicator.isHidden = !shown
-        searchForRecipesButton.isHidden = shown
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -135,8 +126,8 @@ extension SearchRecipeViewController: UITableViewDelegate, UITableViewDataSource
         
         let cellTextLabel = cell.textLabel?.text
         if cellTextLabel?.isEmpty == false {
-            searchForRecipesButton.isEnabled = true
-            searchForRecipesButton.backgroundColor = UIColor.init(red: 0/255, green: 144/255, blue: 81/255, alpha: 1)
+            searchRecipeView.searchForRecipesButton.isEnabled = true
+            searchRecipeView.searchForRecipesButton.backgroundColor = UIColor.init(red: 0/255, green: 144/255, blue: 81/255, alpha: 1)
         }
         return cell
     }
