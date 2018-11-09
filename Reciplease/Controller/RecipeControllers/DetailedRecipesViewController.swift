@@ -85,6 +85,8 @@ class DetailedRecipesViewController: UIViewController {
     
     private func saveFavoriteRecipe() {
         let favoritesRecipes = FavoriteRecipe(context: AppDelegate.viewContext)
+        // we add the recipe name to the dictionary with a true value
+        favoritesRecipes.recipeNameInFavorite[detailedRecipe.name] = true
         favoritesRecipes.image = detailedRecipe.images[0].hostedLargeUrl
         favoritesRecipes.recipeName = detailedRecipe.name
         favoritesRecipes.ingredients = convertIngredientsArrayIntoString(ingredients: matchingRecipe.ingredients)
