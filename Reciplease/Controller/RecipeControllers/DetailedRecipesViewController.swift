@@ -33,9 +33,17 @@ class DetailedRecipesViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func favoriteFunctionality(_ sender: UIButton) {
-        isFavorite = !isFavorite
+        // isFavorite is false by default, we need to check if the recipe is in the dictionary 
+        if recipeNameInFavorite.keys.contains(detailedRecipe.name) {
+            //if in dictionary we know this recipe is a favorite
+            isFavorite = true
+        }
+        
+        // at this point you know if the recipe is a favorite or not
+        // and we can color the buton as we like
+        
         if isFavorite {
-            detailedRecipeView.favoriteButton.setImage(favoriteButtonImage, for: .normal)
+            detailedRecipeView.favoriteButton.setImage(favoriteButtonImage, for: .normal) 
             setTabBarControllerItemBadgeValue(string: "New")
             saveFavoriteRecipe()
         } else {
