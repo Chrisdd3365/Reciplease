@@ -17,7 +17,7 @@ class ResultRecipesListViewController: UIViewController {
     var matchingRecipes = [Matches]()
     var detailedRecipe: DetailedRecipe!
     var detailedRecipeService = DetailedRecipeService()
-    
+  
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,10 @@ class ResultRecipesListViewController: UIViewController {
     }
     
     //MARK: - Methods
+    private func setResultRecipesTableView() {
+        self.navigationItem.title = "List of Recipes"
+    }
+    
     private func getDetailsForRecipe(id: String) {
         detailedRecipeService.getDetailedRecipe(id: id) { (success, detailedRecipe)  in
             if success {
@@ -40,11 +44,7 @@ class ResultRecipesListViewController: UIViewController {
             }
         }
     }
-    
-    private func setResultRecipesTableView() {
-        self.navigationItem.title = "List of Recipes"
-    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailedRecipeSegue",
             let detailedRecipesVC = segue.destination as? DetailedRecipesViewController, let indexPath = self.resultRecipeListTableView.indexPathForSelectedRow {

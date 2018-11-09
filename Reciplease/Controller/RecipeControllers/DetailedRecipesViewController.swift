@@ -17,11 +17,6 @@ class DetailedRecipesViewController: UIViewController {
     var detailedRecipe: DetailedRecipe!
     var matchingRecipe: Matches!
     var favoriteRecipe = FavoriteRecipe.all
-    var detailedFavoriteRecipe: FavoriteRecipe!
-    var noFavoriteButtonImage = UIImage(named: "noFavorite")
-    var favoriteButtonImage = UIImage(named: "favorite")
-    var isFavorite = false
-    var index: Int!
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -29,20 +24,30 @@ class DetailedRecipesViewController: UIViewController {
         setNavigationItemTitle()
         setDetailedRecipeUI()
         detailedRecipeView.toggleActivityIndicator(shown: false)
+        detailedRecipeView.favoriteButton.setImage(updateFavoriteButtonImage(), for: .normal)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        favoriteRecipe = FavoriteRecipe.all
+        detailedRecipeView.favoriteButton.setImage(updateFavoriteButtonImage(), for: .normal)
     }
     
     //MARK: - Actions
     @IBAction func favoriteFunctionality(_ sender: UIButton) {
-        isFavorite = !isFavorite
-        if isFavorite {
-            detailedRecipeView.favoriteButton.setImage(favoriteButtonImage, for: .normal)
-            setTabBarControllerItemBadgeValue(string: "New")
+        guard let tabItems = tabBarController?.tabBar.items else { return }
+        let tabItem = tabItems[1]
+
+        if checkFavoriteRecipeList() == false {
+            detailedRecipeView.favoriteButton.setImage(UIImage(named: "favorite"), for: .normal)
             saveFavoriteRecipe()
+            tabItem.badgeValue = "New"
+            favoriteRecipe = FavoriteRecipe.all
         } else {
-            setTabBarControllerItemBadgeValue(string: "")
-            detailedRecipeView.favoriteButton.setImage(noFavoriteButtonImage, for: .normal)
-            setTabBarControllerItemBadgeValue(string: "")
-            //removeFavoriteRecipe(index:)
+            favoriteRecipe = FavoriteRecipe.all
+            showAlert(title: "Error", message: "You already add this recipe in your favorite list!")
+            tabItem.badgeValue = nil
+            
         }
     }
     
@@ -59,12 +64,28 @@ class DetailedRecipesViewController: UIViewController {
         navigationItem.title = "Detailed Recipe"
     }
     
-    private func setTabBarControllerItemBadgeValue(string: String) {
-        guard let tabItems = tabBarController?.tabBar.items else { return }
-        let tabItem = tabItems[1]
-        tabItem.badgeValue = string
+    private func checkFavoriteRecipeList() -> Bool {
+        var isFavorite = false
+        guard favoriteRecipe.count != 0 else { return false }
+        for recipe in favoriteRecipe {
+            if detailedRecipe.name == recipe.recipeName {
+                isFavorite = true
+                break
+            }
+        }
+        return isFavorite
     }
     
+    private func updateFavoriteButtonImage() -> UIImage {
+        let image: UIImage!
+        if checkFavoriteRecipeList() {
+            image = UIImage(named: "favorite")
+        } else {
+            image = UIImage(named: "noFavorite")
+        }
+        return image
+    }
+
     private func sharingRecipeButtonTapped() {
         let activityController = UIActivityViewController(activityItems: ["Can you cook that for me?", detailedRecipe.source.sourceRecipeUrl], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
@@ -99,11 +120,6 @@ class DetailedRecipesViewController: UIViewController {
         }
     }
 
-    private func removeFavoriteRecipe() {
-        //TODO
-        detailedFavoriteRecipe.deleteRecipeFromFavorite(index: index)
-    }
-    
     private func convertIngredientsArrayIntoString(ingredients: [String]) -> String {
         let ingredientsArray = ingredients.map{ String($0) }
         return ingredientsArray.joined(separator: ", ")

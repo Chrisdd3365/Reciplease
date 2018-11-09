@@ -57,7 +57,6 @@ class FavoritesRecipesListViewController: UIViewController {
             detailedFavoriteRecipeVC.index = index
             let selectedFavoriteRecipe = favoritesRecipes[index]
             detailedFavoriteRecipeVC.detailedFavoriteRecipe = selectedFavoriteRecipe
-            
         }
     }
 }

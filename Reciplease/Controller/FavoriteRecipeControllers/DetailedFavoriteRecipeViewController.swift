@@ -32,7 +32,6 @@ class DetailedFavoriteRecipeViewController: UIViewController {
     }
     
     @IBAction func favoriteFunctionality(_ sender: UIButton) {
-        //TODO
         detailedFavoriteRecipe.deleteRecipeFromFavorite(index: index)
         navigationController?.popViewController(animated: true)
     }
