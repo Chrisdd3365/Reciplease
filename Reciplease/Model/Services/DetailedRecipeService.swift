@@ -12,16 +12,16 @@ import Alamofire
 class DetailedRecipeService {
     
     //MARK: - Properties
-    private var detailedRecipeSessionManager: SessionManager
+    private var yummlySession: YummlySession
     
-    init(detailedRecipeSessionManager: SessionManager = SessionManager.default) {
-        self.detailedRecipeSessionManager = detailedRecipeSessionManager
+    init(yummlySession: YummlySession = YummlySession()) {
+        self.yummlySession = yummlySession
     }
     
     //MARK: - Method
     func getDetailedRecipe(id: String, completion: @escaping (Bool, DetailedRecipe?) -> Void) {
-        let url = YummlyDetailedRecipeAPI.baseURL + "\(id)?" + YummlyDetailedRecipeAPI.appIDURL + YummlyDetailedRecipeAPI.appID + YummlyDetailedRecipeAPI.appKeyURL + YummlyDetailedRecipeAPI.appKey
-        detailedRecipeSessionManager.request(url, method: .get, parameters: nil, encoding: URLEncoding.default).responseJSON { response in
+        guard let url = URL(string: yummlySession.urlStringDetailedBaseUrl + "\(id)?" + yummlySession.urlStringDetailedIdAndKey) else { return }
+        yummlySession.request(url: url, method: .get, parameters: nil, encoding: URLEncoding.default) { response in
             guard let data = response.data, response.error == nil else {
                 print(String(describing: response.error?.localizedDescription))
                 completion(false, nil)

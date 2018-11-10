@@ -12,17 +12,17 @@ import Alamofire
 class SearchRecipeService {
     
     //MARK: - Properties
-    private var searchRecipeSessionManager: SessionManager
+    private var yummlySession: YummlySession
     
-    init(searchRecipeSessionManager: SessionManager = SessionManager.default) {
-        self.searchRecipeSessionManager = searchRecipeSessionManager
+    init(yummlySession: YummlySession = YummlySession()) {
+        self.yummlySession = yummlySession
     }
     
-    //MARK: - Method
+    //MARK: - Methods
     func getRecipe(ingredients: [String], completion: @escaping (Bool, [Matches]?) -> Void) {
-        let url = YummlyAPI.baseURL + YummlyAPI.appIDURL + YummlyAPI.appID + YummlyAPI.appKeyURL + YummlyAPI.appKey + YummlyAPI.picturesURL + YummlyAPI.query
+        guard let url = URL(string: yummlySession.urlStringApi) else { return }
         let parameters = ["q": ingredients]
-        searchRecipeSessionManager.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default).responseJSON { response in
+        yummlySession.request(url: url, method: .get, parameters: parameters, encoding: URLEncoding.default) { response in
             guard let data = response.data, response.error == nil else {
                 completion(false, nil)
                 return
@@ -38,6 +38,9 @@ class SearchRecipeService {
             completion(true, searchRecipeResponseJSON.matches)
         }
     }
+
+    
+    
 }
 
     
