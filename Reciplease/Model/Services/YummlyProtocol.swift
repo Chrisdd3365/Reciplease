@@ -12,7 +12,6 @@ import Alamofire
 protocol YummlyProtocol {
     //MARK: - Properties
     var urlStringApi: String { get }
-    
     var urlStringDetailedBaseUrl: String { get }
     var urlStringDetailedIdAndKey: String { get }
     

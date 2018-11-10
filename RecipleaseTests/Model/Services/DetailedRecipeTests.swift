@@ -14,7 +14,7 @@ class DetailedRecipeTests: XCTestCase {
     
     func testGetDetailedRecipeShouldGetFailedCompletionIfError() {
         //Given
-        let fakeResponse = FakeResponse(data: nil, error: FakeResponseData.error, response: nil)
+        let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.error)
         let yummlySessionFake = YummlySessionFake(fakeResponse: fakeResponse)
         let detailedRecipeService = DetailedRecipeService(yummlySession: yummlySessionFake)
         //When
@@ -30,7 +30,7 @@ class DetailedRecipeTests: XCTestCase {
     
     func testGetDetailedRecipeShouldGetFailedCompletionIfNoData() {
         //Given
-        let fakeResponse = FakeResponse(data: nil, error: nil, response: nil)
+        let fakeResponse = FakeResponse(response: nil, data: nil, error: nil)
         let yummlySessionFake = YummlySessionFake(fakeResponse: fakeResponse)
         let detailedRecipeService = DetailedRecipeService(yummlySession: yummlySessionFake)
         //When
@@ -46,7 +46,7 @@ class DetailedRecipeTests: XCTestCase {
     
     func testGetDetailedRecipeShouldGetFailedCompletionIfIncorrectResponse() {
         //Given
-        let fakeResponse = FakeResponse(data: FakeRecipeResponseData.detailedRecipeCorrectData, error: nil, response: FakeResponseData.responseKO)
+        let fakeResponse = FakeResponse(response: FakeResponseData.responseKO, data: FakeRecipeResponseData.detailedRecipeCorrectData, error: nil)
         let yummlySessionFake = YummlySessionFake(fakeResponse: fakeResponse)
         let detailedRecipeService = DetailedRecipeService(yummlySession: yummlySessionFake)
         //When
@@ -62,7 +62,7 @@ class DetailedRecipeTests: XCTestCase {
     
     func testGetDetailedRecipeShouldGetFailedCompletionIfResponseCorrectAndNoData() {
         //Given
-        let fakeResponse = FakeResponse(data: nil, error: nil, response: FakeResponseData.responseOK)
+        let fakeResponse = FakeResponse(response: FakeResponseData.responseOK, data: nil, error: nil)
         let yummlySessionFake = YummlySessionFake(fakeResponse: fakeResponse)
         let detailedRecipeService = DetailedRecipeService(yummlySession: yummlySessionFake)
         //When
@@ -78,7 +78,7 @@ class DetailedRecipeTests: XCTestCase {
     
     func testGetDetailedRecipeShouldGetFailedCompletionIfIncorrectData() {
         //Given
-        let fakeResponse = FakeResponse(data: FakeResponseData.incorrectData, error: nil, response: FakeResponseData.responseOK)
+        let fakeResponse = FakeResponse(response: FakeResponseData.responseOK, data: FakeResponseData.incorrectData, error: nil)
         let yummlySessionFake = YummlySessionFake(fakeResponse: fakeResponse)
         let detailedRecipeService = DetailedRecipeService(yummlySession: yummlySessionFake)
         //When
@@ -94,7 +94,7 @@ class DetailedRecipeTests: XCTestCase {
     
     func testGetDetailedRecipeShouldGetSuccessCompletionIfNoErrorAndCorrectData() {
         //Given
-        let fakeResponse = FakeResponse(data: FakeRecipeResponseData.detailedRecipeCorrectData, error: nil, response: FakeResponseData.responseOK)
+        let fakeResponse = FakeResponse(response: FakeResponseData.responseOK, data: FakeRecipeResponseData.detailedRecipeCorrectData, error: nil)
         let yummlySessionFake = YummlySessionFake(fakeResponse: fakeResponse)
         let detailedRecipeService = DetailedRecipeService(yummlySession: yummlySessionFake)
         //When

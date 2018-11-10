@@ -19,7 +19,7 @@ struct Matches: Decodable {
     let imageUrlsBySize: ImageUrlsBySize
     let totalTimeInSeconds: Int
     let rating: Int
-    
+ 
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case rating

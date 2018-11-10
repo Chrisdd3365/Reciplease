@@ -38,9 +38,6 @@ class SearchRecipeService {
             completion(true, searchRecipeResponseJSON.matches)
         }
     }
-
-    
-    
 }
 
     

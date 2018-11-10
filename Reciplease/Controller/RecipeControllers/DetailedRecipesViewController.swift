@@ -17,7 +17,7 @@ class DetailedRecipesViewController: UIViewController {
     var detailedRecipe: DetailedRecipe!
     var matchingRecipe: Matches!
     var favoriteRecipe = FavoriteRecipe.all
-    
+ 
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class DetailedRecipesViewController: UIViewController {
     @IBAction func favoriteFunctionality(_ sender: UIButton) {
         guard let tabItems = tabBarController?.tabBar.items else { return }
         let tabItem = tabItems[1]
-
+        
         if checkFavoriteRecipeList() == false {
             detailedRecipeView.favoriteButton.setImage(UIImage(named: "favorite"), for: .normal)
             saveFavoriteRecipe()
@@ -85,12 +85,12 @@ class DetailedRecipesViewController: UIViewController {
         }
         return image
     }
-
+    
     private func sharingRecipeButtonTapped() {
         let activityController = UIActivityViewController(activityItems: ["Can you cook that for me?", detailedRecipe.source.sourceRecipeUrl], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
-
+    
     private func getDirectionsFromSourceRecipeURL() {
         if let detailedRecipe = detailedRecipe {
             guard let url = URL(string: detailedRecipe.source.sourceRecipeUrl) else { return }
@@ -119,7 +119,7 @@ class DetailedRecipesViewController: UIViewController {
             print(error)
         }
     }
-
+    
     private func convertIngredientsArrayIntoString(ingredients: [String]) -> String {
         let ingredientsArray = ingredients.map{ String($0) }
         return ingredientsArray.joined(separator: ", ")
