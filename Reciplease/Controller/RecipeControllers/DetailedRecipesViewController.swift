@@ -35,20 +35,7 @@ class DetailedRecipesViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func favoriteFunctionality(_ sender: UIButton) {
-        guard let tabItems = tabBarController?.tabBar.items else { return }
-        let tabItem = tabItems[1]
-        
-        if checkFavoriteRecipeList() == false {
-            detailedRecipeView.favoriteButton.setImage(UIImage(named: "favorite"), for: .normal)
-            saveFavoriteRecipe()
-            tabItem.badgeValue = "New"
-            favoriteRecipe = FavoriteRecipe.all
-        } else {
-            favoriteRecipe = FavoriteRecipe.all
-            showAlert(title: "Error", message: "You already add this recipe in your favorite list!")
-            tabItem.badgeValue = nil
-            
-        }
+        addToFavoriteSetup()
     }
     
     @IBAction func getDirections(_ sender: Any) {
@@ -64,11 +51,27 @@ class DetailedRecipesViewController: UIViewController {
         navigationItem.title = "Detailed Recipe"
     }
     
+    private func addToFavoriteSetup() {
+        guard let tabItems = tabBarController?.tabBar.items else { return }
+        let tabItem = tabItems[1]
+        
+        if checkFavoriteRecipeList() == false {
+            detailedRecipeView.favoriteButton.setImage(UIImage(named: "favorite"), for: .normal)
+            saveFavoriteRecipe()
+            tabItem.badgeValue = "New"
+            favoriteRecipe = FavoriteRecipe.all
+        } else {
+            favoriteRecipe = FavoriteRecipe.all
+            showAlert(title: "Error", message: "You already add this recipe in your favorite list!")
+            tabItem.badgeValue = nil
+        }
+    }
+    
     private func checkFavoriteRecipeList() -> Bool {
         var isFavorite = false
         guard favoriteRecipe.count != 0 else { return false }
         for recipe in favoriteRecipe {
-            if detailedRecipe.name == recipe.recipeName {
+            if matchingRecipe.id == recipe.id {
                 isFavorite = true
                 break
             }

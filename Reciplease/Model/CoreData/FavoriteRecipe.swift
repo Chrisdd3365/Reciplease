@@ -18,7 +18,7 @@ public class FavoriteRecipe: NSManagedObject {
     
     func deleteRecipeFromFavorite(id: String, context: NSManagedObjectContext = AppDelegate.viewContext) {
         let fetchRequest: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
-        fetchRequest.predicate = NSPredicate.init(format: "id==\(id)")
+        fetchRequest.predicate = NSPredicate.init(format: "id == %@", id)
         
         do {
             let favoritesRecipes = try context.fetch(fetchRequest)
@@ -29,5 +29,10 @@ public class FavoriteRecipe: NSManagedObject {
         } catch let error as NSError {
             print(error)
         }
+    }
+    
+    static func deleteAll(viewContext: NSManagedObjectContext = AppDelegate.viewContext) {
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: FavoriteRecipe.fetchRequest())
+        let _ = try? viewContext.execute(deleteRequest)
     }
 }

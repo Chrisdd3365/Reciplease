@@ -12,17 +12,25 @@ import CoreData
 
 class CoreDataTests: XCTestCase {
     
-    //MARK: - Vars
+    //MARK: - Properties
     var container: NSPersistentContainer!
+    var favoriteRecipe: FavoriteRecipe!
     
+    //MARK: - Tests Life Cycle
     override func setUp() {
         container = AppDelegate.persistentContainer
+    }
+    
+    override func tearDown() {
+        FavoriteRecipe.deleteAll()
+        container = nil
+        super.tearDown()
     }
     
     //MARK: - Methods
     private func insertFavoriteRecipeItem(into managedObjectContext: NSManagedObjectContext) {
         let newFavoriteRecipeItem = FavoriteRecipe(context: managedObjectContext)
-        newFavoriteRecipeItem.recipeName = "Lemon Meltaways"
+        newFavoriteRecipeItem.id = "Lemon-Meltaways-1985782"
     }
     
     //MARK: - Unit Tests
@@ -33,11 +41,15 @@ class CoreDataTests: XCTestCase {
         XCTAssertNoThrow(try container.newBackgroundContext().save())
     }
     
-//    func testDeleteFavoriteRecipeItemInPersistentContainer(from managedObjectContext: NSManagedObjectContext) {
-//        let favoritesRecipes = FavoriteRecipe.all
-//        let favoriteRecipe = favoritesRecipes[0]
-//        let numberOfFavoritesRecipes = favoritesRecipes.count
-//        favoriteRecipe.deleteRecipeFromFavorite(index: favoriteRecipe)
-//        XCTAssertEqual(numberOfFavoritesRecipes, numberOfFavoritesRecipes-1)
-//    }
+    func testDeleteFavoriteRecipeItemInPersistentContainer() {
+        let newFavoriteRecipeItem = FavoriteRecipe(context: container.newBackgroundContext())
+        newFavoriteRecipeItem.id = "Lemon-Meltaways-1985782"
+        favoriteRecipe.deleteRecipeFromFavorite(id: newFavoriteRecipeItem.id!, context: container.newBackgroundContext())
+        XCTAssertEqual(FavoriteRecipe.all.count, FavoriteRecipe.all.count - 1)
+    }
+    
+    func testDeleteAllFavoriteRecipeItemsInPersistentContainer() {
+        FavoriteRecipe.deleteAll(viewContext: container.newBackgroundContext())
+        XCTAssertEqual(FavoriteRecipe.all, [])
+    }
 }

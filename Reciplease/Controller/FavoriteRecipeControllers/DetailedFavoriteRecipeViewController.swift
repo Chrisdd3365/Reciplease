@@ -15,8 +15,6 @@ class DetailedFavoriteRecipeViewController: UIViewController {
     
     //MARK: - Properties
     var detailedFavoriteRecipe: FavoriteRecipe!
-    var isFavorite = false
-    //var index : Int!
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -32,7 +30,6 @@ class DetailedFavoriteRecipeViewController: UIViewController {
     }
     
     @IBAction func favoriteFunctionality(_ sender: UIButton) {
-        //TODO
         detailedFavoriteRecipe.deleteRecipeFromFavorite(id: detailedFavoriteRecipe.id!)
         navigationController?.popViewController(animated: true)
     }
