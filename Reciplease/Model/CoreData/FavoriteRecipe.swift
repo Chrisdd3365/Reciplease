@@ -16,10 +16,16 @@ public class FavoriteRecipe: NSManagedObject {
         return favoritesRecipes
     }
     
-    func deleteRecipeFromFavorite(index: Int) {
-        AppDelegate.viewContext.delete(FavoriteRecipe.all[index])
+    func deleteRecipeFromFavorite(id: String, context: NSManagedObjectContext = AppDelegate.viewContext) {
+        let fetchRequest: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
+        fetchRequest.predicate = NSPredicate.init(format: "id==\(id)")
+        
         do {
-            try AppDelegate.viewContext.save()
+            let favoritesRecipes = try context.fetch(fetchRequest)
+            for favoriteRecipe in favoritesRecipes {
+                context.delete(favoriteRecipe)
+            }
+            try context.save()
         } catch let error as NSError {
             print(error)
         }

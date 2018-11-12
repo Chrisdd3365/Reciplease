@@ -31,6 +31,7 @@
 		9565551221920577002F1755 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9565551021920577002F1755 /* Reciplease.xcdatamodeld */; };
 		95655514219205EA002F1755 /* FavoriteRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95655513219205EA002F1755 /* FavoriteRecipe.swift */; };
 		9573CAA32163BC4A0051E7EB /* URLStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573CAA22163BC4A0051E7EB /* URLStruct.swift */; };
+		9576FFAC2199BC3F002BB7A6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9576FFAB2199BC3F002BB7A6 /* String.swift */; };
 		9578032B217A526D006F2B3C /* DetailedRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9578032A217A526D006F2B3C /* DetailedRecipeView.swift */; };
 		9592C5842167D24000206796 /* SearchRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592C5832167D24000206796 /* SearchRecipeViewController.swift */; };
 		95956039217F5F4600DB0F84 /* FavoritesRecipesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95956038217F5F4600DB0F84 /* FavoritesRecipesListViewController.swift */; };
@@ -87,6 +88,7 @@
 		9565551121920577002F1755 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		95655513219205EA002F1755 /* FavoriteRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipe.swift; sourceTree = "<group>"; };
 		9573CAA22163BC4A0051E7EB /* URLStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLStruct.swift; sourceTree = "<group>"; };
+		9576FFAB2199BC3F002BB7A6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		9578032A217A526D006F2B3C /* DetailedRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRecipeView.swift; sourceTree = "<group>"; };
 		9592C5832167D24000206796 /* SearchRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeViewController.swift; sourceTree = "<group>"; };
 		95956038217F5F4600DB0F84 /* FavoritesRecipesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRecipesListViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				95C691EE216BA25700BEB718 /* UIViewController.swift */,
 				9550D6B521790625004232B1 /* UIImageView.swift */,
 				95123AB2217E20A500860546 /* UITextField.swift */,
+				9576FFAB2199BC3F002BB7A6 /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				950636512170F55E004C8A57 /* RecipeTableViewCell.swift in Sources */,
 				95956039217F5F4600DB0F84 /* FavoritesRecipesListViewController.swift in Sources */,
 				9592C5842167D24000206796 /* SearchRecipeViewController.swift in Sources */,
+				9576FFAC2199BC3F002BB7A6 /* String.swift in Sources */,
 				9578032B217A526D006F2B3C /* DetailedRecipeView.swift in Sources */,
 				95655514219205EA002F1755 /* FavoriteRecipe.swift in Sources */,
 				9573CAA32163BC4A0051E7EB /* URLStruct.swift in Sources */,

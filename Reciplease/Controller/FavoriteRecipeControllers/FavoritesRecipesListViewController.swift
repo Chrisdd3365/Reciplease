@@ -15,7 +15,7 @@ class FavoritesRecipesListViewController: UIViewController {
     
     //MARK: - Property
     var favoritesRecipes = FavoriteRecipe.all
-    var index = 0
+    //var index = 0
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -53,9 +53,7 @@ class FavoritesRecipesListViewController: UIViewController {
         if segue.identifier == "detailedFavoriteRecipeSegue",
             let detailedFavoriteRecipeVC = segue.destination as? DetailedFavoriteRecipeViewController,
             let indexPath = self.favoritesRecipesListTableView.indexPathForSelectedRow {
-            index = indexPath.row
-            detailedFavoriteRecipeVC.index = index
-            let selectedFavoriteRecipe = favoritesRecipes[index]
+            let selectedFavoriteRecipe = favoritesRecipes[indexPath.row]
             detailedFavoriteRecipeVC.detailedFavoriteRecipe = selectedFavoriteRecipe
         }
     }

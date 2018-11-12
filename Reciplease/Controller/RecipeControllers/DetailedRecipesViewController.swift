@@ -106,6 +106,7 @@ class DetailedRecipesViewController: UIViewController {
     
     private func saveFavoriteRecipe() {
         let favoritesRecipes = FavoriteRecipe(context: AppDelegate.viewContext)
+        favoritesRecipes.id = matchingRecipe.id
         favoritesRecipes.image = detailedRecipe.images[0].hostedLargeUrl
         favoritesRecipes.recipeName = detailedRecipe.name
         favoritesRecipes.ingredients = convertIngredientsArrayIntoString(ingredients: matchingRecipe.ingredients)
