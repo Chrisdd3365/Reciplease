@@ -42,6 +42,7 @@ class SearchRecipeViewController: UIViewController {
     }
 
     //MARK: - Methods
+    //Method to add the inputs from the text field to the table view and displaying them like a list of ingredients
     private func addIngredientIntoList() {
         guard let inputs = searchRecipeView.ingredientsTextField.text else { return }
         if inputs != "" {
@@ -57,11 +58,11 @@ class SearchRecipeViewController: UIViewController {
             showAlert(title: "Hey!", message: "You need to tell me what's in your fridge first!")
         }
     }
-    
+    //Method to append ingredient into an array of ingredients
     private func add(ingredient: String) {
         ingredients.append(ingredient)
     }
-    
+    //Method to clear the ingredient's list by tapping the clear button
     private func clearList() {
         if ingredients.isEmpty == false  {
             ingredients.removeAll()
@@ -72,42 +73,42 @@ class SearchRecipeViewController: UIViewController {
             showAlert(title: "Hey!", message: "Don't clear what you already don't have!")
         }
     }
-    
+    //Method to search recipes based on the ingredients available in our fridge by tapping on the searchRecipe button
     private func searchRecipe() {
         searchRecipeService.getRecipe(ingredients: ingredients) { (success, recipes)  in
             self.searchRecipeView.toggleActivityIndicator(shown: true)
             if success, let recipes = recipes {
                 self.matchingRecipes = recipes
-                self.performSegue(withIdentifier: "recipesResultsSegue", sender: self)
+                self.performSegue(withIdentifier: SeguesIdentifiers.resultsRecipesSegueIdentifier, sender: self)
                 self.searchRecipeView.toggleActivityIndicator(shown: false)
             } else {
                 self.showAlert(title: "Error", message: "Recipes data download failed!")
             }
         }
     }
-    
+    //Method to prevent unnecessary inputs from the user
     private func searchForRecipeButtonIsEnabled() {
         searchRecipeView.searchForRecipesButton.isEnabled = false
         searchRecipeView.searchForRecipesButton.backgroundColor = UIColor.lightGray
     }
-    
+    //Method to register and reload data in the table view and call it into the viewDidLoad method
     private func registerIngredientsTableView() {
-        ingredientsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "ingredientCell")
+        ingredientsTableView.register(UITableViewCell.self, forCellReuseIdentifier: CellsIdentifiers.ingredientCellIdentifier)
         ingredientsTableView.reloadData()
     }
-    
+    //Method to dismiss keyboard by tapping anywhere on the screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
+    //Method to pass datas from SearchRecipeViewController to ResultRecipesListViewController with a segue called "recipesResultsSegue"
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "recipesResultsSegue" {
+        if segue.identifier == SeguesIdentifiers.resultsRecipesSegueIdentifier {
             let resultsRecipesVC = segue.destination as! ResultRecipesListViewController
             resultsRecipesVC.matchingRecipes = matchingRecipes
         }
     }
 }
-
+//Extension to setup the ingredientsTableView
 extension SearchRecipeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -118,7 +119,7 @@ extension SearchRecipeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = ingredientsTableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
+        let cell = ingredientsTableView.dequeueReusableCell(withIdentifier: CellsIdentifiers.ingredientCellIdentifier, for: indexPath)
         let ingredient = ingredients[indexPath.row]
         cell.textLabel?.text = "- " + "\(ingredient)"
         cell.textLabel?.textColor = .white

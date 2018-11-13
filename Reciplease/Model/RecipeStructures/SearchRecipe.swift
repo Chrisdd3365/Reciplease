@@ -8,6 +8,7 @@
 
 import Foundation
 
+//Yummly API structure, the search recipe part
 struct SearchRecipe: Decodable {
     let matches: [Matches]
 }

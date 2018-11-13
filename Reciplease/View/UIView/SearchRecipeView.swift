@@ -17,7 +17,8 @@ class SearchRecipeView: UIView {
     @IBOutlet weak var searchForRecipesButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    //MARK: - Method
+    //MARK: - Methods
+    //Method to setup the activity indicator
     func toggleActivityIndicator(shown: Bool) {
         if shown == false {
             activityIndicator.isHidden = !shown

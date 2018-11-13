@@ -10,7 +10,7 @@ import UIKit
 
 class DetailedRecipesViewController: UIViewController {
     
-    //MARK: - Outlet
+    //MARK: - Outlets
     @IBOutlet weak var detailedRecipeView: DetailedRecipeView!
     
     //MARK: - Properties
@@ -47,10 +47,11 @@ class DetailedRecipesViewController: UIViewController {
     }
     
     //MARK: - Methods
+    //Method to display the navigation item's title
     private func setNavigationItemTitle() {
         navigationItem.title = "Detailed Recipe"
     }
-    
+    //Method to handle the setup to add the selected recipe into the favorite recipe list
     private func addToFavoriteSetup() {
         guard let tabItems = tabBarController?.tabBar.items else { return }
         let tabItem = tabItems[1]
@@ -66,7 +67,7 @@ class DetailedRecipesViewController: UIViewController {
             tabItem.badgeValue = nil
         }
     }
-    
+    //Method to check if the id of the selected recipe is already added into the favorite recipe list
     private func checkFavoriteRecipeList() -> Bool {
         var isFavorite = false
         guard favoriteRecipe.count != 0 else { return false }
@@ -78,7 +79,7 @@ class DetailedRecipesViewController: UIViewController {
         }
         return isFavorite
     }
-    
+    //Method to update the favorite button image
     private func updateFavoriteButtonImage() -> UIImage {
         let image: UIImage!
         if checkFavoriteRecipeList() {
@@ -88,12 +89,12 @@ class DetailedRecipesViewController: UIViewController {
         }
         return image
     }
-    
+    //Method to handle the sharing functionnality by tapping the share button
     private func sharingRecipeButtonTapped() {
         let activityController = UIActivityViewController(activityItems: ["Can you cook that for me?", detailedRecipe.source.sourceRecipeUrl], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
-    
+    //Method to get directions from the source recipe URL by tapping the getDirections button
     private func getDirectionsFromSourceRecipeURL() {
         if let detailedRecipe = detailedRecipe {
             guard let url = URL(string: detailedRecipe.source.sourceRecipeUrl) else { return }
@@ -102,11 +103,11 @@ class DetailedRecipesViewController: UIViewController {
             showAlert(title: "Error", message: "Failed to get you any directions. Try again!")
         }
     }
-    
+    //Method to setup the detailed recipe UI
     private func setDetailedRecipeUI() {
         detailedRecipeView.detailedRecipeConfigure(detailedRecipeName: detailedRecipe.name, detailedRecipeDetails: detailedRecipe.ingredientLines, rating: detailedRecipe.rating, timer: detailedRecipe.totalTimeInSeconds / 60, backgroundDetailedRecipeImageURL: detailedRecipe.images[0].hostedLargeUrl)
     }
-    
+    //Method to save the selected recipe into the entity called FavoriteRecipe from CoreData
     private func saveFavoriteRecipe() {
         let favoritesRecipes = FavoriteRecipe(context: AppDelegate.viewContext)
         favoritesRecipes.id = matchingRecipe.id
@@ -123,7 +124,7 @@ class DetailedRecipesViewController: UIViewController {
             print(error)
         }
     }
-    
+    //Method to convert an array of strings into string
     private func convertIngredientsArrayIntoString(ingredients: [String]) -> String {
         let ingredientsArray = ingredients.map{ String($0) }
         return ingredientsArray.joined(separator: ", ")

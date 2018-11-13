@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIImageView {
+    //Method to load an image from his URL and display it with better dimension
     func load(imageURL: String?) {
         guard let urlImageString = imageURL else { return }
         let urlImageStringHD = urlImageString.replacingOccurrences(of: "90", with: "900")

@@ -18,7 +18,8 @@ class DetailedRecipeService {
         self.yummlySession = yummlySession
     }
     
-    //MARK: - Method
+    //MARK: - Methods
+    //Method to get a detailed recipe from Yummly API with a get request
     func getDetailedRecipe(id: String, completion: @escaping (Bool, DetailedRecipe?) -> Void) {
         guard let url = URL(string: yummlySession.urlStringDetailedBaseUrl + "\(id)?" + yummlySession.urlStringDetailedIdAndKey) else { return }
         yummlySession.request(url: url, method: .get, parameters: nil, encoding: URLEncoding.default) { response in

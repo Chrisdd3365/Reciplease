@@ -19,12 +19,13 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var view: UIView!
     
     //MARK: - Methods
+    //Method to convert an array of Strings into a String
     private func convertIngredientsArrayIntoString(ingredients: [String]) -> String {
         let ingredientsArray = ingredients.map{ String($0) }
         return ingredientsArray.joined(separator: ", ")
     }
-    
-    func cellConfigure(recipeName: String, recipeDetails: [String], ratings: Int, timer: Int, backgroundRecipeImageURL: String) {
+    //Method to configure the search recipe cell UI
+    func searchRecipeCellConfigure(recipeName: String, recipeDetails: [String], ratings: Int, timer: Int, backgroundRecipeImageURL: String) {
         recipeTitleLabel.text = recipeName
         recipeDetailsLabel.text = self.convertIngredientsArrayIntoString(ingredients: recipeDetails)
         ratingsLabel.text = String(ratings)

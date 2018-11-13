@@ -10,12 +10,13 @@ import Foundation
 import Alamofire
 
 protocol YummlyProtocol {
+    
     //MARK: - Properties
     var urlStringApi: String { get }
     var urlStringDetailedBaseUrl: String { get }
     var urlStringDetailedIdAndKey: String { get }
     
-    //MARK: - Method
+    //MARK: - Methods
     func request (url: URL, method: HTTPMethod?, parameters: Parameters?, encoding: URLEncoding?, completionHandler: @escaping (DataResponse<Any>) -> Void)
 }
 

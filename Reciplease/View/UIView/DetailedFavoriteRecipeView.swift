@@ -22,6 +22,7 @@ class DetailedFavoriteRecipeView: UIView {
     @IBOutlet weak var favoriteButton: UIButton!
     
     //MARK: - Methods
+    //Method to setup the activity indicator
     func toggleActivityIndicator(shown: Bool) {
         if shown == false {
             activityIndicator.isHidden = !shown
@@ -33,7 +34,7 @@ class DetailedFavoriteRecipeView: UIView {
             getDirectionsButton.isHidden = shown
         }
     }
-    
+    //Method to configure the UI of the detailedFavoriteRecipeView
     func detailedFavoriteRecipeConfigure(detailedFavoriteRecipeName: String, detailedFavoriteRecipeDetails: String, rating: Int, timer: Int, backgroundDetailedFavoriteRecipeImageURL: String) {
         detailedFavoriteRecipeNameLabel.text = detailedFavoriteRecipeName
         detailedFavoriteRecipeDescription.text = detailedFavoriteRecipeDetails

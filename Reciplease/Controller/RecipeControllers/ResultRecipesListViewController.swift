@@ -10,7 +10,7 @@ import UIKit
 
 class ResultRecipesListViewController: UIViewController {
 
-    //MARK: - Outlet
+    //MARK: - Outlets
     @IBOutlet weak var resultRecipeListTableView: UITableView!
     
     //MARK: - Properties
@@ -30,23 +30,24 @@ class ResultRecipesListViewController: UIViewController {
     }
     
     //MARK: - Methods
+    //Method to display the navigation item's title
     private func setResultRecipesTableView() {
         self.navigationItem.title = "List of Recipes"
     }
-    
+    //Method to get the detailed recipe by tapping a cell into the table view
     private func getDetailsForRecipe(id: String) {
         detailedRecipeService.getDetailedRecipe(id: id) { (success, detailedRecipe)  in
             if success {
                 self.detailedRecipe = detailedRecipe
-                self.performSegue(withIdentifier: "detailedRecipeSegue", sender: self)
+                self.performSegue(withIdentifier: SeguesIdentifiers.detailedRecipeSegueidentifier, sender: self)
             } else {
                 self.showAlert(title: "Error", message: "Recipes Details data download failed!")
             }
         }
     }
-
+    //Method to pass datas from the ResultRecipesListViewController to the DetailedRecipesViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailedRecipeSegue",
+        if segue.identifier == SeguesIdentifiers.detailedRecipeSegueidentifier,
             let detailedRecipesVC = segue.destination as? DetailedRecipesViewController, let indexPath = self.resultRecipeListTableView.indexPathForSelectedRow {
             let selectedRecipe = matchingRecipes[indexPath.row]
             detailedRecipesVC.detailedRecipe = detailedRecipe
@@ -54,7 +55,7 @@ class ResultRecipesListViewController: UIViewController {
         }
     }
 }
-
+//Extension to setup the resultRecipeListTableView
 extension ResultRecipesListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -65,11 +66,11 @@ extension ResultRecipesListViewController: UITableViewDelegate, UITableViewDataS
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = resultRecipeListTableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath) as? RecipeTableViewCell else {
+        guard let cell = resultRecipeListTableView.dequeueReusableCell(withIdentifier: CellsIdentifiers.recipeCellIdentifier, for: indexPath) as? RecipeTableViewCell else {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
-        cell.cellConfigure(recipeName: matchingRecipes[indexPath.row].recipeName,
+        cell.searchRecipeCellConfigure(recipeName: matchingRecipes[indexPath.row].recipeName,
                        recipeDetails: matchingRecipes[indexPath.row].ingredients,
                        ratings: matchingRecipes[indexPath.row].rating,
                        timer: matchingRecipes[indexPath.row].totalTimeInSeconds / 60,

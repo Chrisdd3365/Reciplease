@@ -10,12 +10,11 @@ import UIKit
 
 class FavoritesRecipesListViewController: UIViewController {
     
-    //MARK: - Outlet
+    //MARK: - Outlets
     @IBOutlet weak var favoritesRecipesListTableView: UITableView!
     
-    //MARK: - Property
+    //MARK: - Properties
     var favoritesRecipes = FavoriteRecipe.all
-    //var index = 0
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -31,16 +30,17 @@ class FavoritesRecipesListViewController: UIViewController {
     }
     
     //MARK: - Methods
+    //Method to setup the navigation bar's title
     private func setNavigationBarTitle() {
         self.navigationItem.title = "List of Favorites Recipes"
     }
-    
+    //Method to setup the tab bar controller item badge's value
     private func setTabBarControllerItemBadgeValue() {
         guard let tabItems = tabBarController?.tabBar.items else { return }
         let tabItem = tabItems[1]
         tabItem.badgeValue = nil
     }
-    
+    //Method to save context
     private func saveContext() {
         do {
             try AppDelegate.viewContext.save()
@@ -48,9 +48,9 @@ class FavoritesRecipesListViewController: UIViewController {
             print(error)
         }
     }
-    
+    //Method to pass datas from FavoritesRecipesListViewController to DetailedFavoriteRecipeViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailedFavoriteRecipeSegue",
+        if segue.identifier == SeguesIdentifiers.detailedFavoriteRecipeSegueIdentifier,
             let detailedFavoriteRecipeVC = segue.destination as? DetailedFavoriteRecipeViewController,
             let indexPath = self.favoritesRecipesListTableView.indexPathForSelectedRow {
             let selectedFavoriteRecipe = favoritesRecipes[indexPath.row]
@@ -58,7 +58,7 @@ class FavoritesRecipesListViewController: UIViewController {
         }
     }
 }
-
+//Extension to setup the favoritesRecipesListTableView
 extension FavoritesRecipesListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -87,7 +87,7 @@ extension FavoritesRecipesListViewController: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = favoritesRecipesListTableView.dequeueReusableCell(withIdentifier: "favoriteRecipeCell", for: indexPath) as? FavoriteRecipeTableViewCell else {
+        guard let cell = favoritesRecipesListTableView.dequeueReusableCell(withIdentifier: CellsIdentifiers.favoriteRecipeCellIdentifier, for: indexPath) as? FavoriteRecipeTableViewCell else {
             return UITableViewCell()
         }
         let favoriteRecipe = favoritesRecipes[indexPath.row]

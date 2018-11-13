@@ -18,7 +18,8 @@ class FavoriteRecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var favoriteRecipeRatingLabel: UILabel!
     @IBOutlet weak var favoriteRecipeTimerLabel: UILabel!
     
-    //MARK: - Method
+    //MARK: - Methods
+    //Method to configure the favorite recipe cell UI
     func favoriteRecipeCellConfigure(favoriteRecipeName: String, favoriteRecipeDetails: String, ratings: Int, timer: Int, backgroundRecipeImageURL: String) {
         favoriteRecipeNameLabel.text = favoriteRecipeName
         favoriteRecipeDetailsLabel.text = favoriteRecipeDetails

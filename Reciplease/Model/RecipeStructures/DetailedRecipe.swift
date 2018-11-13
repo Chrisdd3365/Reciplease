@@ -8,6 +8,7 @@
 
 import Foundation
 
+//Yummly API stucture, the detailed recipe part
 struct DetailedRecipe: Decodable {
     let totalTimeInSeconds: Int
     let images: [Images]

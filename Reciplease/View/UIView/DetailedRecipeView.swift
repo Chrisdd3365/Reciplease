@@ -22,6 +22,7 @@ class DetailedRecipeView: UIView {
     @IBOutlet weak var favoriteButton: UIButton!
     
     //MARK: - Methods
+    //Method to convert an array of Strings into String
     private func convertIntoStringDetailedRecipe(detailedRecipe: [String]) -> String {
         var descriptions = ""
         for recipeDescription in detailedRecipe {
@@ -29,7 +30,7 @@ class DetailedRecipeView: UIView {
         }
         return descriptions
     }
-    
+    //Method to setup the activity indicator
     func toggleActivityIndicator(shown: Bool) {
         if shown == false {
             activityIndicator.isHidden = !shown
@@ -41,7 +42,7 @@ class DetailedRecipeView: UIView {
             getDirectionsButton.isHidden = shown
         }
     }
-    
+    //Method to configure the UI of DetailedRecipeView
     func detailedRecipeConfigure(detailedRecipeName: String, detailedRecipeDetails: [String], rating: Int, timer: Int, backgroundDetailedRecipeImageURL: String) {
         detailedRecipeNameLabel.text = detailedRecipeName
         detailedRecipeDescriptionTextView.text = convertIntoStringDetailedRecipe(detailedRecipe: detailedRecipeDetails)

@@ -10,13 +10,16 @@ import Foundation
 import CoreData
 
 public class FavoriteRecipe: NSManagedObject {
+    
+    //MARK : - Properties
     static var all: [FavoriteRecipe] {
         let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
         guard let favoritesRecipes = try? AppDelegate.viewContext.fetch(request) else { return [] }
         return favoritesRecipes
     }
-    
-    func deleteRecipeFromFavorite(id: String, context: NSManagedObjectContext = AppDelegate.viewContext) {
+    //MARK: - Methods
+    //Static method to delete a recipe from the favorite list based on the attribute called "id"
+    static func deleteRecipeFromFavorite(id: String, context: NSManagedObjectContext = AppDelegate.viewContext) {
         let fetchRequest: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
         fetchRequest.predicate = NSPredicate.init(format: "id == %@", id)
         
@@ -30,7 +33,7 @@ public class FavoriteRecipe: NSManagedObject {
             print(error)
         }
     }
-    
+    //Static method to delete everything
     static func deleteAll(viewContext: NSManagedObjectContext = AppDelegate.viewContext) {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: FavoriteRecipe.fetchRequest())
         let _ = try? viewContext.execute(deleteRequest)

@@ -19,6 +19,7 @@ class SearchRecipeService {
     }
     
     //MARK: - Methods
+    //Method to get a recipe based on ingredients available in the fridge from Yummly API with a get request
     func getRecipe(ingredients: [String], completion: @escaping (Bool, [Matches]?) -> Void) {
         guard let url = URL(string: yummlySession.urlStringApi) else { return }
         let parameters = ["q": ingredients]

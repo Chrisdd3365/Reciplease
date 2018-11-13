@@ -9,6 +9,7 @@
 import UIKit
 
 extension UITextField {
+    //Method to setup the UI of the text field in SearchRecipeViewController
     func setBottomBorder() {
         self.borderStyle = .none
         self.layer.backgroundColor = UIColor.white.cgColor

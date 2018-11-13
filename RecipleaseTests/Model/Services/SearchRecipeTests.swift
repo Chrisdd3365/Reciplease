@@ -12,6 +12,7 @@ import Alamofire
 
 class SearchRecipeTests: XCTestCase {
     
+    //MARK: - Unit Tests
     func testGetRecipeShouldGetFailedCompletionIfError() {
         //Given
         let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.error)

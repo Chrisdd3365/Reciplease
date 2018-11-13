@@ -12,6 +12,7 @@ import Alamofire
 
 class DetailedRecipeTests: XCTestCase {
     
+    //MARK: - Unit Tests
     func testGetDetailedRecipeShouldGetFailedCompletionIfError() {
         //Given
         let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.error)
@@ -28,7 +29,7 @@ class DetailedRecipeTests: XCTestCase {
         wait(for: [expectation], timeout: 0.01)
     }
     
-    func testGetDetailedRecipeShouldGetFailedCompletionIfNoData() {
+    func testGetDetailedRecipeShouldGetFailedCompletionIfNilData() {
         //Given
         let fakeResponse = FakeResponse(response: nil, data: nil, error: nil)
         let yummlySessionFake = YummlySessionFake(fakeResponse: fakeResponse)
