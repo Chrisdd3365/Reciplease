@@ -31,8 +31,8 @@ Reciplease has now a share button to allow the user to share a selected recipe t
  
 ## Running the tests:
 
-UnitTesting Model by testing API request with Double Fake Alamofire Session and Fake Response Data. 
-UnitTesting DataModel by testing CoreData.
+- UnitTesting Model by testing API request with Double Fake Alamofire Session and Fake Response Data. 
+- UnitTesting DataModel by testing CoreData.
 
 
 ## Requirements:
