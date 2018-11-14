@@ -647,7 +647,7 @@
         <!--Reciplease-->
         <scene sceneID="ceC-su-O3C">
             <objects>
-                <viewController title="Reciplease" id="7ad-aF-v0v" customClass="DetailedRecipesViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Reciplease" id="7ad-aF-v0v" customClass="DetailedRecipeViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UsY-Ib-utl" customClass="DetailedRecipeView" customModule="Reciplease" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

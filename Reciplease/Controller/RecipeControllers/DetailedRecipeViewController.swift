@@ -1,5 +1,5 @@
 //
-//  DetailedRecipesViewController.swift
+//  DetailedRecipeViewController.swift
 //  Reciplease
 //
 //  Created by Christophe DURAND on 19/10/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailedRecipesViewController: UIViewController {
+class DetailedRecipeViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var detailedRecipeView: DetailedRecipeView!

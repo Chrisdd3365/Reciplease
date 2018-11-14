@@ -48,10 +48,10 @@ class ResultRecipesListViewController: UIViewController {
     //Method to pass datas from the ResultRecipesListViewController to the DetailedRecipesViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SeguesIdentifiers.detailedRecipeSegueidentifier,
-            let detailedRecipesVC = segue.destination as? DetailedRecipesViewController, let indexPath = self.resultRecipeListTableView.indexPathForSelectedRow {
+            let detailedRecipeVC = segue.destination as? DetailedRecipeViewController, let indexPath = self.resultRecipeListTableView.indexPathForSelectedRow {
             let selectedRecipe = matchingRecipes[indexPath.row]
-            detailedRecipesVC.detailedRecipe = detailedRecipe
-            detailedRecipesVC.matchingRecipe = selectedRecipe
+            detailedRecipeVC.detailedRecipe = detailedRecipe
+            detailedRecipeVC.matchingRecipe = selectedRecipe
         }
     }
 }
