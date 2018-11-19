@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+
 class SearchRecipeService {
     
     //MARK: - Properties
