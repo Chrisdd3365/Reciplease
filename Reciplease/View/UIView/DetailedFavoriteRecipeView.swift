@@ -9,7 +9,6 @@
 import UIKit
 
 class DetailedFavoriteRecipeView: UIView {
-
     //MARK: - Outlets
     @IBOutlet weak var backgroundDetailedFavoriteRecipeImageView: UIImageView!
     @IBOutlet weak var detailedFavoriteRecipeNameLabel: UILabel!
@@ -20,6 +19,18 @@ class DetailedFavoriteRecipeView: UIView {
     @IBOutlet weak var getDirectionsButton: UIButton!
     @IBOutlet weak var littleBlackView: UIView!
     @IBOutlet weak var favoriteButton: UIButton!
+    
+    //MARK: - Property
+    var detailedFavoriteRecipesViewModel: DetailedFavoriteRecipesViewModel! {
+        didSet {
+            detailedFavoriteRecipeNameLabel.text = detailedFavoriteRecipesViewModel.name
+            detailedFavoriteRecipeDescription.text = detailedFavoriteRecipesViewModel.recipeDetails
+            detailedFavoriteRecipeRatingLabel.text = detailedFavoriteRecipesViewModel.rating
+            detailedFavoriteRecipeTimerLabel.text = detailedFavoriteRecipesViewModel.timer 
+            backgroundDetailedFavoriteRecipeImageView.load(imageURL: detailedFavoriteRecipesViewModel.backgroundImageURL)
+            backgroundDetailedFavoriteRecipeImageView.sd_setImage(with: URL(string: detailedFavoriteRecipesViewModel.backgroundImageURL ?? ""))
+        }
+    }
     
     //MARK: - Methods
     //Method to setup the activity indicator
@@ -33,15 +44,5 @@ class DetailedFavoriteRecipeView: UIView {
             activityIndicator.startAnimating()
             getDirectionsButton.isHidden = shown
         }
-    }
-    //Method to configure the UI of the detailedFavoriteRecipeView
-    func detailedFavoriteRecipeConfigure(detailedFavoriteRecipeName: String, detailedFavoriteRecipeDetails: String, rating: Int, timer: Int, backgroundDetailedFavoriteRecipeImageURL: String) {
-        detailedFavoriteRecipeNameLabel.text = detailedFavoriteRecipeName
-        detailedFavoriteRecipeDescription.text = detailedFavoriteRecipeDetails
-        detailedFavoriteRecipeRatingLabel.text = String(rating)
-        detailedFavoriteRecipeTimerLabel.text = String(timer) + " min"
-        backgroundDetailedFavoriteRecipeImageView.load(imageURL: backgroundDetailedFavoriteRecipeImageURL)
-        littleBlackView.layer.borderWidth = 1
-        littleBlackView.layer.borderColor = UIColor.init(red: 222/255, green: 225/255, blue: 227/255, alpha: 1).cgColor
     }
 }

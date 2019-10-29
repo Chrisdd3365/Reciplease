@@ -9,7 +9,6 @@
 import UIKit
 
 class DetailedRecipeView: UIView {
-    
     //MARK: - Outlets
     @IBOutlet weak var detailedRecipeBackgroundImageView: UIImageView!
     @IBOutlet weak var detailedRecipeNameLabel: UILabel!
@@ -21,15 +20,19 @@ class DetailedRecipeView: UIView {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var favoriteButton: UIButton!
     
-    //MARK: - Methods
-    //Method to convert an array of Strings into String
-    private func convertIntoStringDetailedRecipe(detailedRecipe: [String]) -> String {
-        var descriptions = ""
-        for recipeDescription in detailedRecipe {
-            descriptions += "- " + recipeDescription + "\n"
+    //MARK: - Property
+    var detailedRecipesViewModel: DetailedRecipesViewModel! {
+        didSet {
+            detailedRecipeNameLabel.text = detailedRecipesViewModel.name
+            detailedRecipeDescriptionTextView.text = detailedRecipesViewModel.recipeDetails
+            ratingLabel.text = detailedRecipesViewModel.rating
+            timerLabel.text = detailedRecipesViewModel.timer + " min"
+            detailedRecipeBackgroundImageView.load(imageURL: detailedRecipesViewModel.backgroundImageURL)
+            detailedRecipeBackgroundImageView.sd_setImage(with: URL(string: detailedRecipesViewModel.backgroundImageURL))
         }
-        return descriptions
     }
+    
+    //MARK: - Method
     //Method to setup the activity indicator
     func toggleActivityIndicator(shown: Bool) {
         if shown == false {
@@ -41,15 +44,5 @@ class DetailedRecipeView: UIView {
             activityIndicator.startAnimating()
             getDirectionsButton.isHidden = shown
         }
-    }
-    //Method to configure the UI of DetailedRecipeView
-    func detailedRecipeConfigure(detailedRecipeName: String, detailedRecipeDetails: [String], rating: Int, timer: Int, backgroundDetailedRecipeImageURL: String) {
-        detailedRecipeNameLabel.text = detailedRecipeName
-        detailedRecipeDescriptionTextView.text = convertIntoStringDetailedRecipe(detailedRecipe: detailedRecipeDetails)
-        ratingLabel.text = String(rating)
-        timerLabel.text = String(timer) + " min"
-        detailedRecipeBackgroundImageView.load(imageURL: backgroundDetailedRecipeImageURL)
-        littleBlackView.layer.borderWidth = 1
-        littleBlackView.layer.borderColor = UIColor.init(red: 222/255, green: 225/255, blue: 227/255, alpha: 1).cgColor
     }
 }

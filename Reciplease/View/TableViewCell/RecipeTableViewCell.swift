@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import SDWebImage
 
 class RecipeTableViewCell: UITableViewCell {
-
     //MARK: - Outlets
     @IBOutlet weak var recipeBackgroundImage: UIImageView!
     @IBOutlet weak var recipeTitleLabel: UILabel!
@@ -18,20 +18,19 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var view: UIView!
     
-    //MARK: - Methods
-    //Method to convert an array of Strings into a String
-    private func convertIngredientsArrayIntoString(ingredients: [String]) -> String {
-        let ingredientsArray = ingredients.map{ String($0) }
-        return ingredientsArray.joined(separator: ", ")
+    //MARK: - Property
+    //Setup Cell
+    var matchingRecipesViewModel: MatchingRecipesViewModel! {
+        didSet {
+            recipeTitleLabel.text = matchingRecipesViewModel.name
+            recipeDetailsLabel.text = matchingRecipesViewModel.recipeDetails
+            ratingsLabel.text = matchingRecipesViewModel.rating
+            timerLabel.text = matchingRecipesViewModel.timer + " min"
+            recipeBackgroundImage.load(imageURL: matchingRecipesViewModel.backgroundImageURL)
+            recipeBackgroundImage.sd_setImage(with: URL(string: matchingRecipesViewModel.backgroundImageURL))
+        }
     }
-    //Method to configure the search recipe cell UI
-    func searchRecipeCellConfigure(recipeName: String, recipeDetails: [String], ratings: Int, timer: Int, backgroundRecipeImageURL: String) {
-        recipeTitleLabel.text = recipeName
-        recipeDetailsLabel.text = self.convertIngredientsArrayIntoString(ingredients: recipeDetails)
-        ratingsLabel.text = String(ratings)
-        timerLabel.text = String(timer) + " min"
-        recipeBackgroundImage.load(imageURL: backgroundRecipeImageURL)
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.init(red: 222/255, green: 225/255, blue: 227/255, alpha: 1).cgColor
-    }
+    
+    //MARK: - Method
+
 }

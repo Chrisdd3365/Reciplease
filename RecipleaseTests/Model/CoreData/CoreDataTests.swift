@@ -11,7 +11,6 @@ import CoreData
 @testable import Reciplease
 
 class CoreDataTests: XCTestCase {
-    
     //MARK: - Properties
     var container: NSPersistentContainer!
     
@@ -23,7 +22,7 @@ class CoreDataTests: XCTestCase {
     
     override func tearDown() {
         flushData()
-        FavoriteRecipe.deleteAll()
+        CoreDataManager.deleteAll()
         container = nil
         super.tearDown()
     }
@@ -47,13 +46,13 @@ class CoreDataTests: XCTestCase {
         let favoritesRecipes = FavoriteRecipe.all
         let favoriteRecipe = favoritesRecipes[0]
         
-        FavoriteRecipe.deleteRecipeFromFavorite(id: favoriteRecipe.id!)
+        CoreDataManager.deleteRecipeFromFavorite(id: favoriteRecipe.id!)
         
         XCTAssert(true)
     }
  
     func testDeleteAllFavoriteRecipeItemsInPersistentContainer() {
-        FavoriteRecipe.deleteAll(viewContext: container.newBackgroundContext())
+        CoreDataManager.deleteAll(viewContext: container.newBackgroundContext())
         XCTAssertEqual(FavoriteRecipe.all, [])
     }
 }

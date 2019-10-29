@@ -10,8 +10,7 @@ import Foundation
 import Alamofire
 
 class YummlySession: YummlyProtocol {
-    
-    //MARK: - Methods
+    //MARK: - Method
     //Create our own request method to be able to override it for unit testing later on
     func request(url: URL, method: HTTPMethod?, parameters: Parameters?, encoding: URLEncoding?, completionHandler: @escaping (DataResponse<Any>) -> Void) {
         Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default).responseJSON { (response) in

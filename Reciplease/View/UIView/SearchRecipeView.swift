@@ -9,7 +9,6 @@
 import UIKit
 
 class SearchRecipeView: UIView {
-
     //MARK: - Outlets
     @IBOutlet weak var ingredientsTextField: UITextField!
     @IBOutlet weak var addButton: UIButton!
@@ -17,7 +16,7 @@ class SearchRecipeView: UIView {
     @IBOutlet weak var searchForRecipesButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    //MARK: - Methods
+    //MARK: - Method
     //Method to setup the activity indicator
     func toggleActivityIndicator(shown: Bool) {
         if shown == false {

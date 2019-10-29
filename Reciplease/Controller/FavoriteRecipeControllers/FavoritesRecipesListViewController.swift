@@ -9,8 +9,7 @@
 import UIKit
 
 class FavoritesRecipesListViewController: UIViewController {
-    
-    //MARK: - Outlets
+    //MARK: - Outlet
     @IBOutlet weak var favoritesRecipesListTableView: UITableView!
     
     //MARK: - Properties
@@ -34,20 +33,14 @@ class FavoritesRecipesListViewController: UIViewController {
     private func setNavigationBarTitle() {
         self.navigationItem.title = "List of Favorites Recipes"
     }
+    
     //Method to setup the tab bar controller item badge's value
     private func setTabBarControllerItemBadgeValue() {
         guard let tabItems = tabBarController?.tabBar.items else { return }
         let tabItem = tabItems[1]
         tabItem.badgeValue = nil
     }
-    //Method to save context
-    private func saveContext() {
-        do {
-            try AppDelegate.viewContext.save()
-        } catch let error as NSError {
-            print(error)
-        }
-    }
+    
     //Method to pass datas from FavoritesRecipesListViewController to DetailedFavoriteRecipeViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SeguesIdentifiers.detailedFavoriteRecipeSegueIdentifier,
@@ -58,6 +51,7 @@ class FavoritesRecipesListViewController: UIViewController {
         }
     }
 }
+
 //Extension to setup the favoritesRecipesListTableView
 extension FavoritesRecipesListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,9 +84,12 @@ extension FavoritesRecipesListViewController: UITableViewDelegate, UITableViewDa
         guard let cell = favoritesRecipesListTableView.dequeueReusableCell(withIdentifier: CellsIdentifiers.favoriteRecipeCellIdentifier, for: indexPath) as? FavoriteRecipeTableViewCell else {
             return UITableViewCell()
         }
-        let favoriteRecipe = favoritesRecipes[indexPath.row]
         cell.selectionStyle = .none
-        cell.favoriteRecipeCellConfigure(favoriteRecipeName: favoriteRecipe.recipeName!, favoriteRecipeDetails: favoriteRecipe.ingredients!, ratings: Int(favoriteRecipe.rating), timer: Int(favoriteRecipe.totalTimeInSeconds) / 60, backgroundRecipeImageURL: favoriteRecipe.image!)
+        
+        let favoriteRecipeViewModel = FavoritesRecipesViewModel(favoriteRecipe: favoritesRecipes[indexPath.row])
+        cell.favoritesRecipesViewModel = favoriteRecipeViewModel
+        cell.viewConfigure(view: cell.view)
+        
         return cell
     }
     
@@ -100,7 +97,7 @@ extension FavoritesRecipesListViewController: UITableViewDelegate, UITableViewDa
         if editingStyle == .delete {
             AppDelegate.viewContext.delete(favoritesRecipes[indexPath.row])
             favoritesRecipes.remove(at: indexPath.row)
-            saveContext()
+            CoreDataManager.saveContext()
             favoritesRecipesListTableView.beginUpdates()
             favoritesRecipesListTableView.deleteRows(at: [indexPath], with: .automatic)
             favoritesRecipesListTableView.endUpdates()

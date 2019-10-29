@@ -10,15 +10,14 @@ import Foundation
 import Alamofire
 
 class SearchRecipeService {
-    
-    //MARK: - Properties
+    //MARK: - Property
     private var yummlySession: YummlySession
     
     init(yummlySession: YummlySession = YummlySession()) {
         self.yummlySession = yummlySession
     }
     
-    //MARK: - Methods
+    //MARK: - Method
     //Method to get a recipe based on ingredients available in the fridge from Yummly API with a get request
     func getRecipe(ingredients: [String], completion: @escaping (Bool, [Matches]?) -> Void) {
         guard let url = URL(string: yummlySession.urlStringApi) else { return }

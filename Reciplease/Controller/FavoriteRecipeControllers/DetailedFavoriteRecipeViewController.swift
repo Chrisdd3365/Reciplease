@@ -9,11 +9,10 @@
 import UIKit
 
 class DetailedFavoriteRecipeViewController: UIViewController {
-    
-    //MARK: - Outlets
+    //MARK: - Outlet
     @IBOutlet var detailedFavoriteRecipeView: DetailedFavoriteRecipeView!
     
-    //MARK: - Properties
+    //MARK: - Property
     var detailedFavoriteRecipe: FavoriteRecipe!
     
     //MARK: - View Life Cycle
@@ -30,7 +29,7 @@ class DetailedFavoriteRecipeViewController: UIViewController {
     }
     
     @IBAction func favoriteFunctionality(_ sender: UIButton) {
-        FavoriteRecipe.deleteRecipeFromFavorite(id: detailedFavoriteRecipe.id!)
+        CoreDataManager.deleteRecipeFromFavorite(id: detailedFavoriteRecipe.id!)
         navigationController?.popViewController(animated: true)
     }
     
@@ -44,11 +43,13 @@ class DetailedFavoriteRecipeViewController: UIViewController {
         navigationItem.title = "Detailed Favorite Recipe"
         navigationController?.navigationBar.tintColor = UIColor.black
     }
+    
     //Method to handle the sharing functionnality when tapping on the share button
     private func sharingRecipeButtonTapped() {
         let activityController = UIActivityViewController(activityItems: ["Can you cook that for me?", detailedFavoriteRecipe.sourceUrl as Any], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
+    
     //Method to get directions from the source recipe URL when tapping on the getDirections button
     private func getDirectionsFromSourceRecipeURL() {
         if let detailedFavoriteRecipe = detailedFavoriteRecipe {
@@ -58,17 +59,11 @@ class DetailedFavoriteRecipeViewController: UIViewController {
             showAlert(title: "Error", message: "Failed to get you any directions. Try again!")
         }
     }
+    
     //Method to setup the detailed favorite recipe UI
     private func setDetailedFavoriteRecipeUI() {
-        detailedFavoriteRecipeView.detailedFavoriteRecipeConfigure(detailedFavoriteRecipeName: detailedFavoriteRecipe.recipeName!, detailedFavoriteRecipeDetails: self.convertDetailedFavoriteRecipeIngredients(detailedFavoriteRecipeIngredients: detailedFavoriteRecipe.detailedIngredients!), rating: Int(detailedFavoriteRecipe.rating), timer: Int(detailedFavoriteRecipe.totalTimeInSeconds / 60), backgroundDetailedFavoriteRecipeImageURL: detailedFavoriteRecipe.image!)
-    }
-    //Method to convert a string into a list of strings
-    private func convertDetailedFavoriteRecipeIngredients(detailedFavoriteRecipeIngredients: String) -> String {
-        var description = ""
-        let detailedFavoriteRecipeIngredientsArray = detailedFavoriteRecipeIngredients.components(separatedBy: ", ")
-        for ingredients in detailedFavoriteRecipeIngredientsArray {
-            description += "- " + ingredients + "\n"
-        }
-        return description
+        let detailedFavoriteRecipesViewModel = DetailedFavoriteRecipesViewModel(favoriteRecipe: detailedFavoriteRecipe)
+        detailedFavoriteRecipeView.detailedFavoriteRecipesViewModel = detailedFavoriteRecipesViewModel
+        detailedFavoriteRecipeView.viewConfigure(view: detailedFavoriteRecipeView.littleBlackView)
     }
 }
