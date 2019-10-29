@@ -1,4 +1,4 @@
-# Project 10 of DA IOS Path - Openclassroom
+# Project 10 of DA IOS Path - Openclassrooms
 
 # Reciplease
 
